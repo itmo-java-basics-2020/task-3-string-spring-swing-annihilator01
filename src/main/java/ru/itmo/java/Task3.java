@@ -106,7 +106,7 @@ public class Task3 {
         }
 
         int i = 0;
-        StringBuilder encodedString = new StringBuilder();
+        StringBuilder encodedStringBuilder = new StringBuilder();
 
         while (i < input.length()) {
             int count = 0;
@@ -117,10 +117,10 @@ public class Task3 {
                 i++;
             }
 
-            encodedString.append(letter).append(count);
+            encodedStringBuilder.append(letter).append(count);
         }
 
-        return encodedString.toString();
+        return encodedStringBuilder.toString();
     }
 
     /**
@@ -227,12 +227,17 @@ public class Task3 {
      * Напишите функцию, принимающую массив строк и строку-перфикс и возвращающую кол-во строк массива с данным префиксом
      */
     int getStringsStartWithPrefix(String[] inputStrings, String prefix) {
-        if (inputStrings == null || prefix == null || inputStrings.length < prefix.length()) {
+        if (inputStrings == null || prefix == null) {
             return 0;
         }
 
         int count = inputStrings.length;
         for (String string : inputStrings) {
+            if (string.length() < prefix.length()) {
+                count--;
+                continue;
+            }
+
             for (int i = 0; i < prefix.length(); i++) {
                 if (string.charAt(i) != prefix.charAt(i)) {
                     count--;
